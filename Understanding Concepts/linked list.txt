@@ -1,0 +1,16 @@
+struct Node* first = NULL;
+struct Node* ptr1 = first; // ptr1 = NULL
+
+while (ptr1->link != NULL) // ptr1 is NULL -- Crash!
+
+Why we always include ptr1 != NULL:
+To protect the program from crashing if the list is empty, or ptr1 becomes NULL in some case.
+
+When does a crash happen?
+Here are the most common reasons:
+
+Situation					                  Example				         Result
+❌ Accessing memory through a NULL pointer	ptr->data when ptr == NULL	    Crash
+❌ Accessing array out of bounds		        arr[10] when array size is 5	Crash or garbage value
+❌ Freeing already freed memory			    free(ptr); free(ptr);		    Crash
+❌ Using uninitialized pointer			    struct Node *p; p->data = 5;	Crash
