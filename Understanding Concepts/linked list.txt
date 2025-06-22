@@ -5,6 +5,9 @@ while (ptr1->link != NULL) // ptr1 is NULL -- Crash!
 
 Why we always include ptr1 != NULL:
 To protect the program from crashing if the list is empty, or ptr1 becomes NULL in some case.
+It exits unexpectedly without completing its task.
+
+In C programming, this is usually caused by invalid memory access.
 
 When does a crash happen?
 Here are the most common reasons:
