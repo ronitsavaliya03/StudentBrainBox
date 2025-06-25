@@ -15,7 +15,7 @@ void insertAtFront(int value) {
     first = newNode;
 }
 
-void insertAtEnd(int value) {
+void insertAtEnd(int value) { 
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode->info = value;
     newNode->link = NULL;
@@ -54,12 +54,24 @@ void deleteEnd() {
         return;
     }
 
-    struct Node* temp = first;
-    while (temp->link->link != NULL)
-        temp = temp->link;
+    // struct Node* temp = first; 
+    // while (temp->link->link != NULL)
+    //     temp = temp->link;
 
-    free(temp->link);
-    temp->link = NULL;
+    // free(temp->link);
+    // temp->link = NULL;
+
+    struct Node* pred= first;
+    struct Node* save= first->link;
+
+    while (save->link!=NULL)
+    {
+        pred=save;
+        save=save->link;
+    }
+
+    pred->link=NULL;
+    free(save);
     printf("Last node deleted.\n");
 }
 
@@ -74,18 +86,29 @@ void deleteAtPosition(int pos) {
         return;
     }
 
-    struct Node* temp = first;
-    for (int i = 1; i < pos - 1 && temp != NULL; i++)
-        temp = temp->link;
+    // struct Node* temp = first;
+    // for (int i = 1; i < pos - 1 && temp != NULL; i++)
+    //     temp = temp->link;
 
-    if (temp == NULL || temp->link == NULL) {
-        printf("Invalid position.\n");
-        return;
+    // if (temp == NULL || temp->link == NULL) {
+    //     printf("Invalid position.\n");
+    //     return;
+    // }
+
+    // struct Node* toDelete = temp->link;
+    // temp->link = temp->link->link;
+    // free(toDelete);
+
+    struct Node* pred=first;
+    struct Node* save=first->link;
+
+    for(int i=1; i<pos-1 && save!=NULL; i++){
+        pred=save;
+        save=save->link;
     }
 
-    struct Node* toDelete = temp->link;
-    temp->link = temp->link->link;
-    free(toDelete);
+    pred->link=save->link;
+    free(save); 
     printf("Node at position %d deleted.\n", pos);
 }
 
